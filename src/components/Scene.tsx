@@ -2,9 +2,10 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Physics, useBox, usePlane } from '@react-three/cannon';
+import { Mesh } from 'three';
 
 const BoxWithPhysics = () => {
-  const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0] }));
+  const [ref] = useBox<Mesh>(() => ({ mass: 1, position: [0, 5, 0] }));
   return (
     <mesh ref={ref} castShadow receiveShadow>
       <boxGeometry args={[1, 1, 1]} />
@@ -14,7 +15,7 @@ const BoxWithPhysics = () => {
 };
 
 const GroundPlane = () => {
-  const [ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0] }));
+  const [ref] = usePlane<Mesh>(() => ({ rotation: [-Math.PI / 2, 0, 0] }));
   return (
     <mesh ref={ref} receiveShadow>
       <planeGeometry args={[100, 100]} />
